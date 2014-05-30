@@ -1,0 +1,90 @@
+ArrayDecl
+    [ num ] 
+    epsilon 
+ArrayExpr
+    [ Expr ] 
+    epsilon 
+ArrayParamDecl
+    [ ] 
+    epsilon 
+BinExpr
+    BinOp Expr 
+    epsilon 
+BinOp
+    + 
+    - 
+    * 
+    / 
+    == 
+    != 
+    < 
+    <= 
+    > 
+    >= 
+    && 
+    || 
+Block
+    { VarDeclList StmtList } 
+Expr
+    Primary BinExpr 
+    UnaryOp Expr BinExpr 
+    id ArrayExpr = Expr BinExpr 
+ExprList
+    ExprListTail 
+    epsilon 
+ExprListEnd
+    , ExprListTail 
+    epsilon 
+ExprListTail
+    Expr ExprListEnd 
+FunDecl
+    Type id ( ParamDecList ) Block 
+FunDeclList
+    FunDecl FunDeclListTail 
+FunDeclListTail
+    FunDeclList 
+    epsilon 
+IdTail
+    ( ExprList ) 
+    [ Expr ] 
+    epsilon 
+ParamDecl
+    Type id ArrayParamDecl 
+ParamDeclEnd
+    , ParamDeclListTail 
+    epsilon 
+ParamDeclList
+    ParamDeclListTail 
+    epsilon 
+ParamDeclListTail
+    ParamDecl ParamDeclEnd 
+Primary
+    id IdTail 
+    num 
+    ( Expr ) 
+Program
+    VarDeclList FunDeclList 
+Stmt
+    ; 
+    Expr ; 
+    return Expr ; 
+    break ; 
+    if ( Expr ) Stmt else Stmt 
+    while ( Expr ) Stmt 
+    Block 
+StmtList
+    Stmt StmtListTail 
+StmtListTail
+    StmtList 
+    epsilon 
+Type
+    int 
+    char 
+UnaryOp
+    - 
+    ! 
+VarDecl
+    Type id ArrayDecl ; 
+VarDeclList
+    VarDecl VarDeclList 
+    epsilon 
