@@ -1,31 +1,29 @@
 #include<iostream>
+#include<cctype>
+#include<iomanip>
 #include<sstream>
 #include<fstream>
 #include<string>
 #include<vector>
+#include<set>
 #include<map>
 #include"Parser.h"
 using namespace std;
 
 char grammar[] = "grammar_modified.txt"; 
-bool Nullable[MaxNonTerm];
-struct Nonterm{
-    vector< vector< string > > prod;
-};
 
 int NTcnt, Tcnt;
 map<string, Nonterm> Grammar;
-
-void input();
+static map<string, int> Nullable;
+static map<string, set<string> > First;
+static map<string, set<string> > Follow;
 
 int ParserGenerator(char *grammar){
     
 
-    input();
-    getNullable();
 }
 
-void input(){
+static void input(){
     
     ifstream fin(grammar, ifstream::in);
     string term, buf, head;
@@ -46,18 +44,16 @@ void input(){
         }
     }
 }
- //   for(itr = Grammar.begin(); itr != Grammar.end(); ++itr){
-    //map<string, Nonterm> itr;
 
-bool getNullable(string &head){
-    if(!Nullable[head]) 
+bool getNullable(const string &head){
+    if(Nullable[head]) 
         return Nullable[head] & 1;
     Nonterm &tmp = Grammar[head];
 
     for(int i=0; i<tmp.prod.size(); i++){
         bool result = true;
         for(int j=0; j<tmp.prod[i].size(); j++)
-            if(tmp.prod[i][j][0] >= 'a' || !getNullable(tmp.prod[i][j])){
+            if(!isupper(tmp.prod[i][j][0]) || !getNullable(tmp.prod[i][j])){
                 result = false;
                 break;
             }
@@ -67,7 +63,7 @@ bool getNullable(string &head){
     return Nullable[head] = 2, false;
 }
 
-set<string>& getFirst(string &head){
+set<string>& getFirst(const string &head){
     if(!First[head].empty())
         return First[head];
     Nonterm &tmp = Grammar[head];
@@ -76,13 +72,12 @@ set<string>& getFirst(string &head){
 
     for(int i=0; i<tmp.prod.size(); i++){
         for(int j=0; j<tmp.prod[i].size(); j++){
-            if(tmp.prod[i][j][0] >= 'a'){
+            if(!isupper(tmp.prod[i][j][0])){
                 first.insert(tmp.prod[i][j]);
                 break;
-            }else if(tmp.prod[i][j][0] < 'a'){
+            }else{
                 set<string> &st = getFirst(tmp.prod[i][j]);
-                for(itr = st.begin(); itr != st.end(); ++itr)
-                    first.insert(itr->first);
+                first.insert(st.begin(), st.end());
                 if(!getNullable(tmp.prod[i][j]))
                     break;
             }
@@ -98,22 +93,74 @@ set<string>& getFollow(string &head){
     Nonterm &tmp = Grammar[head];
     set<string> &follow = Follow[head];
     set<string>::iterator itr;
-
+    set<string> pre;
     for(int i=0; i<tmp.prod.size(); i++){
-        for(int j=0; j<tmp.prod[i].size(); j++){
-            if(tmp.prod[i][j][0] < 'a'){
-                set<string> &tmp = Follow[tmp.prod[i][j]];
-                if(j != tmp.prod[i].size() - 1 && tmp.prod[i][j+1][0] < 'a'){
-                    set<string> &ntf = First[tmp.prod[i][j+1]];
-
+        bool nul = true, nulhd = true;
+        for(int j=tmp.prod[i].size()-1; ~j; j--){
+            string &nw = tmp.prod[i][j];
+            if(isupper(nw[0])){
+                if(nulhd){
+                    // record follow
+                    Fe[nw].push_back(head);
+                    Fre[head].push_back(nw);
+                    nulhd = getNullable(nw);
                 }
+                Follow[nw].insert(pre.begin(), pre.end());
+                if(!getNullable(nw))
+                    pre.clear();
+                pre.insert(First[nw].begin(), First[nw].end());
+            }else{
+                nulhd = false;
+                pre.clear();
+                pre.insert(nw);
             }
         }
     }
     return follow;
 }
 
+void dfsFollow(string nw, bool rev){
+    vector<string> &vec = rev ? Fre[nw] : Fe[nw];
+    vis[nw] = true;
+    for(int i=0; i<vec.size(); i++)
+        if(!vis[vec[i]])
+            dfs(vec[i], rev);
+    if(!rev) 
+        stk.push(nw);
+    else{
+        sum.insert(Follow[nw].begin(), Follow[nw].end());
+    }
+}
 
 int main(){
-    ParserGenerator(grammar);
+    input();
+
+    freopen("set.txt", "w", stdout);
+    map<string, Nonterm>::iterator itr;
+    cout << "Nullable" << endl;
+    for(itr = Grammar.begin(); itr!=Grammar.end(); ++itr)
+        if(getNullable(itr->first))
+            cout << left << setw(20) << itr->first << ":true" << endl;
+        else
+            cout << left << setw(20) << itr->first << ":false" << endl;
+    cout << "First" << endl;
+    for(itr = Grammar.begin(); itr!=Grammar.end(); ++itr){
+        set<string> &tmp = getFirst(itr->first);
+        set<string>::iterator sitr;
+        cout << left << setw(20) << itr->first << ":";
+        for(sitr = tmp.begin(); sitr!=tmp.end(); ++sitr)
+            cout << *sitr << ' ';
+        cout << endl;
+    }
+    
+    for(itr = Grammar.begin(); itr!=Grammar.end(); ++itr){
+        set<string> &tmp = getFollow(itr->first);
+        set<string>::iterator sitr;
+        cout << left << setw(20) << itr->first << ":";
+        for(sitr = tmp.begin(); sitr!=tmp.end(); ++sitr)
+            cout << *sitr << ' ';
+        cout << endl;
+    }
+
+    return 0;
 }
