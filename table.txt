@@ -1,0 +1,8 @@
+VarDeclList         ;              epsilon 
+VarDeclList         break          epsilon 
+VarDeclList         id             epsilon 
+VarDeclList         if             epsilon 
+VarDeclList         num            epsilon 
+VarDeclList         return         epsilon 
+VarDeclList         while          epsilon 
+VarDeclList         {              epsilon 

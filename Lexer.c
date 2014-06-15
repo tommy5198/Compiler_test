@@ -1,8 +1,14 @@
-#include"Lexer.h"
+#include<stdio.h>
+#include<string.h>
 #include<regex.h>
+#include"Lexer.h"
+#include"ParseTree.h"
+#define TOKEN_OUTPUT "token.txt"
+#define MAXlen 1000
 
+static char *source = "test.c";
 // Lexer generate source code to token list, if success return 0, else return 1
-int Lexer(char *source){
+int Lexer(){
     
     // FILE IO 
     FILE *fin = fopen(source, "r");
@@ -22,10 +28,10 @@ int Lexer(char *source){
     const char *reg_exp[7] ={ 
                     "^(int|char|return|if|else|while|break)$",          // Keys     
                     "^(=|!|\\+|-|\\*|/|==|!=|<|>|<=|>=|&&|\\|\\|)$",    // Ops
-                    "^(\\[|\\]|\\(|\\)|\\{|\\}|;|,)$",                  // Sps
+                    "^[][(){};,]$",                  // Sps
                     "^[a-zA-z_][a-zA-Z0-9_]*$",                         // Id
                     "^[0-9]+$",                                         // Num
-                    "^\'[.|\\n|\\t| ]\'$",                              // Char
+                    "^\'(.|\\\\n|\\\\t| )\'$",                              // Char
                     "^//$"                                              // Com
     };
 
@@ -44,7 +50,6 @@ int Lexer(char *source){
             return 1;
         }
     }
-    
     // genarate source code to token list
     fprintf(stdout, "generate token list from %s to %s\n", source, TOKEN_OUTPUT);
     for(line = 1; fgets(str, MAXlen, fin); line++){ 
@@ -52,24 +57,37 @@ int Lexer(char *source){
         fprintf(fout, "Line %d:\n", line);
 
         // spilt a line by space, tab or newline
-        for(token = strtok(str, " \t\r\n"); token; token = strtok(NULL, " \t\r\n")){
-
+        for(token = strtok(str, " \t\n"); token; token = strtok(NULL, " \t\n")){
+            if(strcmp(token, "//") == 0)
+                break;
+            
             // match reg_obj
-            for(i=0; i<7; i++)
+            for(i=0; i<6; i++)
                 if(!(reg_error = regexec(reg_obj[i], token, 0, 0, 0)) ){
                     // is matched
-                    fprintf(fout, "\t%s\t: %s\n", reg_des[i], token);
+                    fprintf(fout, "\t%-15s: %s\n", reg_des[i], token);
+                    if(i == 3 && match("id", token))
+                        return 1;
+                    else if(i == 4 && match("num", token))
+                        return 1;
+                    else if(i == 5) // char, but undefine in grammar
+                        ;
+                    else if((i==6 || i<3) && match(token, token))
+                        return 1;
                     break;
                 }
-
-            if(i == 7){
+            if(i == 6){
                 // not matched
                 fprintf(stdout, "Lexer error!\nline %d: unknown token \"%s\"\n", line, token);
                 fclose(fin);
                 fclose(fout);
                 return 1;
             }
+            
+            // parse ~ icg
+ //           match(token);
         }
     }
-    return 0;
+    return match("$", "$");
 }
+

@@ -1,5 +1,10 @@
 #ifndef PARSER_H
 #define PARSER_H
+#include<vector>
+#include<set>
+#include<string>
+#include<map>
+using namespace std;
 
 struct Nonterm{
     vector< vector< string > > prod;

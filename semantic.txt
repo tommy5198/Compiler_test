@@ -1,41 +1,36 @@
 Program
-    DeclList
-DeclList
-    Type DeclListTail
-DeclListTail
-    main ( ParamDeclList ) Block
-    id ArrayDecl ; DeclList
+    VarDeclList FunDeclList
 VarDeclList
     VarDecl VarDeclList
     epsilon
 VarDecl
-    Type id ArrayDecl ;
+    Type id ArrayDecl ;         // ArrayDecl.type = Type.type, ArrayDecl.name = id
 ArrayDecl
-    [ num ]
-    epsilon
+    [ num ]                     // insert(id, array, num, type)
+    epsilon                     // insert(id, var, type)
 FunDeclList
     FunDecl FunDeclListTail
 FunDeclListTail
     FunDeclList
     epsilon
 FunDecl
-    Type id ( ParamDeclList ) Block
+    Type id ( ParamDeclList ) Block  // ParamDeclList.name = id, ParamDeclList.type = Type.type
 ParamDeclList
-    ParamDeclListTail
-    epsilon
+    ParamDeclListTail           //  // ParamDeclListTail.name = ParamDeclList.name, ParamDeclListTail.type = ParamDeclList.type
+    epsilon                     
 ParamDeclListTail
     ParamDecl ParamDeclEnd
 ParamDeclEnd
     , ParamDeclListTail
     epsilon
 ParamDecl
-    Type id ArrayParamDecl
+    Type id ArrayParamDecl      //  ArrayParamDecl = Par
 ArrayParamDecl
     [ ]
     epsilon
-Block
+Block           // inc scope id
     { VarDeclList StmtList }
-Type
+Type            // set type
     int
     char
 StmtList
@@ -45,7 +40,7 @@ StmtListTail
     epsilon
 Stmt
     ;
-    Primary = Expr ;
+    Expr ;
     return Expr ;
     break ;
     if ( Expr ) Stmt else Stmt
@@ -53,16 +48,21 @@ Stmt
     Block
 Expr
     Primary BinExpr
-    UnaryOp Primary
+    UnaryOp Expr BinExpr
+    id ArrayExpr = Expr BinExpr
 BinExpr
-    BinOp Primary
+    BinOp Expr
+    epsilon
+ArrayExpr
+    [ Expr ]
     epsilon
 Primary
     id IdTail
     num
+    ( Expr )
 IdTail
-    [ Expr ]
     ( ExprList )
+    [ Expr ]
     epsilon
 ExprList
     ExprListTail
@@ -72,10 +72,10 @@ ExprListTail
 ExprListEnd
     , ExprListTail
     epsilon
-UnaryOp
+UnaryOp         // UnaryOp.val = op UnaryOp.val
     -
     !
-BinOp
+BinOp           // BinOp.val = BinOp.a op Binop.b
     +
     -
     *
