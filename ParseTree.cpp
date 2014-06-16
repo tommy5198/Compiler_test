@@ -1,7 +1,10 @@
 #include"ParseTable.h"
 #include"ParseTree.h"
+#include"SymbolTable.h"
+#include"Parser.h"
 #include<cstdio>
 #include<map>
+#include<set>
 #include<cstring>
 #include<string>
 #include<stack>
@@ -16,19 +19,42 @@ struct stkitem{
 };
 static stack<stkitem> stk;
 static ofstream fout("tree.txt", ofstream::out);
-
+static int stat;
+static int CurSp;
+static int TopSp;
+static set<string>::iterator it;
+static char type[5];
+int pre[100];
 
 int match(char* Sym, char* next){
     if(stk.empty()){
         stk.push((stkitem){0, "$"});
         stk.push((stkitem){0, "Program"});
     }
-    if(strcmp(next, "main") == 0)
-        Sym = next;
-
+    
     while(!stk.empty()){
         stkitem top = stk.top();
         stk.pop();
+        if(!top.symbol.compare("Type")){
+            strcpy(type, next);
+            stat |= 1;
+        }else if(!top.symbol.compare("id")){
+            if(stat&1){
+                setSym(1, next, type, CurSp, 0);
+                stat ^= 1;
+            }else ;
+                //tsym[tcnt++] = getSym(next, CurSp);
+        }else if(!top.symbol.compare("{")){
+            pre[++TopSp] = CurSp;
+            CurSp = TopSp;
+        }else if(!top.symbol.compare("}"))
+            CurSp = pre[CurSp];
+        else if(!top.symbol.compare("="))
+            stat |= 2;
+        else if(!top.symbol.compare("Expr"))
+            stat |= 4;
+        if(stat&4 && getFollow("Expr").find(top.symbol) != getFollow("Expr").end())
+            ;
         if(isupper(top.symbol[0]) && Ptable[top.symbol][Sym].id){
             vector<string> &prod = *(Ptable[top.symbol][Sym].prod);
             for(int i=0; i<top.id*3; i++)

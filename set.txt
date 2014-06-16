@@ -4,7 +4,7 @@ ArrayParamDecl      :true
 BinExpr             :true
 BinOp               :false
 Block               :false
-DeclList            :false
+DeclList            :true
 DeclListTail        :false
 Expr                :false
 ExprList            :true
@@ -13,13 +13,14 @@ ExprListTail        :false
 FunDecl             :false
 FunDeclList         :false
 FunDeclListTail     :true
+FuncHead            :false
 IdTail              :true
 ParamDecl           :false
 ParamDeclEnd        :true
 ParamDeclList       :true
 ParamDeclListTail   :false
 Primary             :false
-Program             :false
+Program             :true
 Stmt                :false
 StmtList            :false
 StmtListTail        :true
@@ -35,7 +36,7 @@ BinExpr             :!= && * + - / < <= == > >= ||
 BinOp               :!= && * + - / < <= == > >= || 
 Block               :{ 
 DeclList            :char int 
-DeclListTail        :id main 
+DeclListTail        :( ; [ 
 Expr                :! - id num 
 ExprList            :! - id num 
 ExprListEnd         :, 
@@ -43,6 +44,7 @@ ExprListTail        :! - id num
 FunDecl             :char int 
 FunDeclList         :char int 
 FunDeclListTail     :char int 
+FuncHead            :( 
 IdTail              :( [ 
 ParamDecl           :char int 
 ParamDeclEnd        :, 
@@ -63,9 +65,9 @@ ArrayDecl           :;
 ArrayParamDecl      :) , 
 BinExpr             :) , ; ] 
 BinOp               :id num 
-Block               :$ ; break char else id if int main num return while { } 
-DeclList            :$ main 
-DeclListTail        :$ main 
+Block               :$ ( ; break char else id if int num return while { } 
+DeclList            :$ ( 
+DeclListTail        :$ ( 
 Expr                :) , ; ] 
 ExprList            :) 
 ExprListEnd         :) 
@@ -73,6 +75,7 @@ ExprListTail        :)
 FunDecl             :char int 
 FunDeclList         :
 FunDeclListTail     :
+FuncHead            :$ ( char int 
 IdTail              :!= && ) * + , - / ; < <= = == > >= ] id num || 
 ParamDecl           :) , 
 ParamDeclEnd        :) 
@@ -83,7 +86,7 @@ Program             :$
 Stmt                :; break else id if num return while { } 
 StmtList            :} 
 StmtListTail        :} 
-Type                :id main 
+Type                :id 
 UnaryOp             :id num 
 VarDecl             :; break char id if int num return while { 
 VarDeclList         :; break id if num return while { 

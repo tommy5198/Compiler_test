@@ -2,253 +2,257 @@
    2 DeclList
       3 Type
          4 int
+      3 id
+         4 x
       3 DeclListTail
-         4 id
-            5 x
          4 ArrayDecl
             5 epsilon
          4 ;
          4 DeclList
             5 Type
                6 int
-            5 DeclListTail
+            5 id
                6 main
-               6 (
-               6 ParamDeclList
-                  7 epsilon
-               6 )
-               6 Block
-                  7 {
-                  7 VarDeclList
-                     8 VarDecl
-                        9 Type
-                           10 int
-                        9 id
-                           10 a
-                        9 ArrayDecl
-                           10 epsilon
-                        9 ;
+            5 DeclListTail
+               6 FuncHead
+                  7 (
+                  7 ParamDeclList
+                     8 epsilon
+                  7 )
+                  7 Block
+                     8 {
                      8 VarDeclList
                         9 VarDecl
                            10 Type
                               11 int
                            10 id
-                              11 b
+                              11 a
                            10 ArrayDecl
                               11 epsilon
                            10 ;
                         9 VarDeclList
                            10 VarDecl
                               11 Type
-                                 12 char
+                                 12 int
                               11 id
-                                 12 y
+                                 12 b
                               11 ArrayDecl
                                  12 epsilon
                               11 ;
                            10 VarDeclList
-                              11 epsilon
-                  7 StmtList
-                     8 Stmt
-                        9 Primary
-                           10 id
-                              11 a
-                           10 IdTail
-                              11 epsilon
-                        9 =
-                        9 Expr
+                              11 VarDecl
+                                 12 Type
+                                    13 char
+                                 12 id
+                                    13 y
+                                 12 ArrayDecl
+                                    13 epsilon
+                                 12 ;
+                              11 VarDeclList
+                                 12 epsilon
+                     8 StmtList
+                        9 Stmt
                            10 Primary
-                              11 num
-                                 12 1
-                           10 BinExpr
-                              11 epsilon
-                        9 ;
-                     8 StmtListTail
-                        9 StmtList
-                           10 Stmt
-                              11 if
-                              11 (
-                              11 Expr
-                                 12 Primary
-                                    13 id
-                                       14 a
-                                    13 IdTail
-                                       14 epsilon
-                                 12 BinExpr
-                                    13 BinOp
-                                       14 ==
-                                    13 Primary
-                                       14 num
-                                          15 1
-                              11 )
+                              11 id
+                                 12 a
+                              11 IdTail
+                                 12 epsilon
+                           10 =
+                           10 Expr
+                              11 Primary
+                                 12 num
+                                    13 1
+                              11 BinExpr
+                                 12 epsilon
+                           10 ;
+                        9 StmtListTail
+                           10 StmtList
                               11 Stmt
-                                 12 Block
-                                    13 {
-                                    13 VarDeclList
-                                       14 epsilon
-                                    13 StmtList
-                                       14 Stmt
-                                          15 Primary
-                                             16 id
-                                                17 a
-                                             16 IdTail
-                                                17 epsilon
-                                          15 =
-                                          15 Expr
-                                             16 Primary
-                                                17 num
-                                                   18 2
-                                             16 BinExpr
-                                                17 epsilon
-                                          15 ;
-                                       14 StmtListTail
-                                          15 epsilon
-                                    13 }
-                              11 else
-                              11 Stmt
-                                 12 Block
-                                    13 {
-                                    13 VarDeclList
-                                       14 epsilon
-                                    13 StmtList
-                                       14 Stmt
-                                          15 Primary
-                                             16 id
-                                                17 a
-                                             16 IdTail
-                                                17 epsilon
-                                          15 =
-                                          15 Expr
-                                             16 Primary
-                                                17 num
-                                                   18 3
-                                             16 BinExpr
-                                                17 epsilon
-                                          15 ;
-                                       14 StmtListTail
-                                          15 epsilon
-                                    13 }
-                           10 StmtListTail
-                              11 StmtList
-                                 12 Stmt
+                                 12 if
+                                 12 (
+                                 12 Expr
                                     13 Primary
                                        14 id
-                                          15 b
+                                          15 a
                                        14 IdTail
                                           15 epsilon
-                                    13 =
-                                    13 Expr
+                                    13 BinExpr
+                                       14 BinOp
+                                          15 ==
                                        14 Primary
                                           15 num
-                                             16 2
-                                       14 BinExpr
+                                             16 1
+                                 12 )
+                                 12 Stmt
+                                    13 Block
+                                       14 {
+                                       14 VarDeclList
                                           15 epsilon
-                                    13 ;
-                                 12 StmtListTail
-                                    13 StmtList
-                                       14 Stmt
-                                          15 while
-                                          15 (
-                                          15 Expr
+                                       14 StmtList
+                                          15 Stmt
                                              16 Primary
                                                 17 id
                                                    18 a
                                                 17 IdTail
                                                    18 epsilon
-                                             16 BinExpr
-                                                17 BinOp
-                                                   18 >
+                                             16 =
+                                             16 Expr
                                                 17 Primary
                                                    18 num
-                                                      19 0
-                                          15 )
-                                          15 Stmt
-                                             16 Block
-                                                17 {
-                                                17 VarDeclList
+                                                      19 2
+                                                17 BinExpr
                                                    18 epsilon
-                                                17 StmtList
-                                                   18 Stmt
-                                                      19 Primary
-                                                         20 id
-                                                            21 b
-                                                         20 IdTail
-                                                            21 epsilon
-                                                      19 =
-                                                      19 Expr
+                                             16 ;
+                                          15 StmtListTail
+                                             16 epsilon
+                                       14 }
+                                 12 else
+                                 12 Stmt
+                                    13 Block
+                                       14 {
+                                       14 VarDeclList
+                                          15 epsilon
+                                       14 StmtList
+                                          15 Stmt
+                                             16 Primary
+                                                17 id
+                                                   18 a
+                                                17 IdTail
+                                                   18 epsilon
+                                             16 =
+                                             16 Expr
+                                                17 Primary
+                                                   18 num
+                                                      19 3
+                                                17 BinExpr
+                                                   18 epsilon
+                                             16 ;
+                                          15 StmtListTail
+                                             16 epsilon
+                                       14 }
+                              11 StmtListTail
+                                 12 StmtList
+                                    13 Stmt
+                                       14 Primary
+                                          15 id
+                                             16 b
+                                          15 IdTail
+                                             16 epsilon
+                                       14 =
+                                       14 Expr
+                                          15 Primary
+                                             16 num
+                                                17 2
+                                          15 BinExpr
+                                             16 epsilon
+                                       14 ;
+                                    13 StmtListTail
+                                       14 StmtList
+                                          15 Stmt
+                                             16 while
+                                             16 (
+                                             16 Expr
+                                                17 Primary
+                                                   18 id
+                                                      19 a
+                                                   18 IdTail
+                                                      19 epsilon
+                                                17 BinExpr
+                                                   18 BinOp
+                                                      19 >
+                                                   18 Primary
+                                                      19 num
+                                                         20 0
+                                             16 )
+                                             16 Stmt
+                                                17 Block
+                                                   18 {
+                                                   18 VarDeclList
+                                                      19 epsilon
+                                                   18 StmtList
+                                                      19 Stmt
                                                          20 Primary
                                                             21 id
                                                                22 b
                                                             21 IdTail
                                                                22 epsilon
-                                                         20 BinExpr
-                                                            21 BinOp
-                                                               22 +
-                                                            21 Primary
-                                                               22 num
-                                                                  23 1
-                                                      19 ;
-                                                   18 StmtListTail
-                                                      19 StmtList
-                                                         20 Stmt
+                                                         20 =
+                                                         20 Expr
                                                             21 Primary
                                                                22 id
-                                                                  23 a
+                                                                  23 b
                                                                22 IdTail
                                                                   23 epsilon
-                                                            21 =
-                                                            21 Expr
+                                                            21 BinExpr
+                                                               22 BinOp
+                                                                  23 +
+                                                               22 Primary
+                                                                  23 num
+                                                                     24 1
+                                                         20 ;
+                                                      19 StmtListTail
+                                                         20 StmtList
+                                                            21 Stmt
                                                                22 Primary
                                                                   23 id
                                                                      24 a
                                                                   23 IdTail
                                                                      24 epsilon
-                                                               22 BinExpr
-                                                                  23 BinOp
-                                                                     24 -
+                                                               22 =
+                                                               22 Expr
                                                                   23 Primary
-                                                                     24 num
-                                                                        25 1
-                                                            21 ;
-                                                         20 StmtListTail
-                                                            21 epsilon
-                                                17 }
-                                       14 StmtListTail
-                                          15 StmtList
-                                             16 Stmt
-                                                17 Primary
-                                                   18 id
-                                                      19 x
-                                                   18 IdTail
-                                                      19 epsilon
-                                                17 =
-                                                17 Expr
+                                                                     24 id
+                                                                        25 a
+                                                                     24 IdTail
+                                                                        25 epsilon
+                                                                  23 BinExpr
+                                                                     24 BinOp
+                                                                        25 -
+                                                                     24 Primary
+                                                                        25 num
+                                                                           26 1
+                                                               22 ;
+                                                            21 StmtListTail
+                                                               22 epsilon
+                                                   18 }
+                                          15 StmtListTail
+                                             16 StmtList
+                                                17 Stmt
                                                    18 Primary
                                                       19 id
-                                                         20 a
+                                                         20 x
                                                       19 IdTail
                                                          20 epsilon
-                                                   18 BinExpr
-                                                      19 BinOp
-                                                         20 +
+                                                   18 =
+                                                   18 Expr
                                                       19 Primary
                                                          20 id
-                                                            21 b
+                                                            21 a
                                                          20 IdTail
                                                             21 epsilon
-                                                17 ;
-                                             16 StmtListTail
-                                                17 StmtList
-                                                   18 Stmt
-                                                      19 return
-                                                      19 Expr
+                                                      19 BinExpr
+                                                         20 BinOp
+                                                            21 +
                                                          20 Primary
-                                                            21 num
-                                                               22 0
-                                                         20 BinExpr
-                                                            21 epsilon
-                                                      19 ;
-                                                   18 StmtListTail
-                                                      19 epsilon
-                  7 }
+                                                            21 id
+                                                               22 b
+                                                            21 IdTail
+                                                               22 epsilon
+                                                   18 ;
+                                                17 StmtListTail
+                                                   18 StmtList
+                                                      19 Stmt
+                                                         20 return
+                                                         20 Expr
+                                                            21 Primary
+                                                               22 num
+                                                                  23 0
+                                                            21 BinExpr
+                                                               22 epsilon
+                                                         20 ;
+                                                      19 StmtListTail
+                                                         20 epsilon
+                     8 }
+               6 DeclList
+                  7 epsilon
 1 $

@@ -1,10 +1,13 @@
 Program
     DeclList
 DeclList
-    Type DeclListTail
+    Type id DeclListTail
+    epsilon
 DeclListTail
-    main ( ParamDeclList ) Block
-    id ArrayDecl ; DeclList
+    FuncHead DeclList
+    ArrayDecl ; DeclList
+FuncHead
+    ( ParamDeclList ) Block
 VarDeclList
     VarDecl VarDeclList
     epsilon

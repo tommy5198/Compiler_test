@@ -48,7 +48,7 @@ static void input(){
                     Nullable[head] = 1;
             }
             if(head.compare("epsilon") == 0)
-                cout << lcnt <<endl;
+                cout << "Ahhhhhh" <<endl;
             lcnt++;
             Grammar[head].prod.push_back(drv);
         }
@@ -199,9 +199,13 @@ void SETALL(){
 }
 
 int main(){
+    cout << "input" << endl;
     input();
+    cout << "set" << endl;
     SETALL();
+    cout << "Ptable" << endl;
     parseTable();
+    cout << "Parse" << endl;
     Lexer();
     return 0;
 }
