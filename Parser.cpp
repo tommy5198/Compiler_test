@@ -14,8 +14,6 @@
 #include"Lexer.h"
 using namespace std;
 
-char grammar[] = "grammar_modified.txt"; 
-
 int NTcnt, Tcnt;
 map<string, Nonterm> Grammar;
 map<string, int> Nullable;
@@ -25,12 +23,7 @@ set<string> ErrorSet;
 static stack<string> stk;
 static map<string, set<string> > Fre;
 
-int ParserGenerator(char *grammar){
-    
-
-}
-
-static void input(){
+static void input(char *grammar){
     
     ifstream fin(grammar, ifstream::in);
     string term, buf, head;
@@ -198,9 +191,9 @@ void SETALL(){
     }
 }
 
-int main(){
+int main(int argc, char **argv){
     cout << "input" << endl;
-    input();
+    input(argv[1]);
     cout << "set" << endl;
     SETALL();
     cout << "Ptable" << endl;

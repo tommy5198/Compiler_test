@@ -14,10 +14,10 @@ extern map<string, Nonterm> Grammar;
 map<string, map<string, Pnode> > Ptable;
 static map<string, Nonterm>::iterator itr;
 static int cnt = 1e9;
+static ofstream fout("table.txt", ofstream::out);
 
 static bool setPtable(int i, set<string> &st){
     
-    ofstream fout("table.txt", ofstream::out);
     set<string>::iterator sitr = st.begin();
     while(sitr != st.end()){
         Pnode &tmp = Ptable[itr->first][*sitr];
@@ -42,6 +42,7 @@ void parseTable(){
     itr = Grammar.begin();
     set<string>::iterator sitr;
     while(itr != Grammar.end()){
+ //       cout << itr->first << endl;
         for(int i=0; i<itr->second.prod.size(); i++){
             int j;
             for(j=0; j<itr->second.prod[i].size(); j++){

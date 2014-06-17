@@ -1,8 +1,35 @@
-VarDeclList         ;              epsilon 
-VarDeclList         break          epsilon 
-VarDeclList         id             epsilon 
-VarDeclList         if             epsilon 
-VarDeclList         num            epsilon 
-VarDeclList         return         epsilon 
-VarDeclList         while          epsilon 
-VarDeclList         {              epsilon 
+BinOp               +              + 
+BinOp               -              - 
+BinOp               *              * 
+BinOp               /              / 
+BinOp               ==             == 
+BinOp               !=             != 
+BinOp               <              < 
+BinOp               <=             <= 
+BinOp               >              > 
+BinOp               >=             >= 
+BinOp               &&             && 
+BinOp               ||             || 
+Block               {              { VarDeclList StmtList } 
+DeclList            ;              VarDecl2 Program 
+DeclList            [              VarDecl2 Program 
+DeclList            (              ( ParamDeclList ) Block FunDeclList2 
+Expr                num            num Expr2 
+Expr                (              ( Expr ) Expr2 
+Expr                !              UnaryOp Expr Expr2 
+Expr                -              UnaryOp Expr Expr2 
+Expr                id             id Id 
+Expr2               !=             BinOp Expr Expr2 
+Expr2               &&             BinOp Expr Expr2 
+Expr2               *              BinOp Expr Expr2 
+Expr2               +              BinOp Expr Expr2 
+Expr2               -              BinOp Expr Expr2 
+Expr2               /              BinOp Expr Expr2 
+Expr2               <              BinOp Expr Expr2 
+Expr2               <=             BinOp Expr Expr2 
+Expr2               ==             BinOp Expr Expr2 
+Expr2               >              BinOp Expr Expr2 
+Expr2               >=             BinOp Expr Expr2 
+Expr2               ||             BinOp Expr Expr2 
+Expr2               !              epsilon 
+Expr2               !=             epsilon 

@@ -1,9 +1,7 @@
 #ifndef SYMBOLTABLE_H
 #define SYMBOLTABLE_H
-
-#ifdef __cplusplus
-extern "C"{
-#endif
+#include<string>
+using namespace std;
 
 struct Snode{
     int id;
@@ -19,9 +17,6 @@ struct Snode{
 
 void setSym(int, char*, char*, int, int);
 Snode getSym(char*, int);
-
-#ifdef __cplusplus
-}
-#endif
+void Symbol(string, char*);
 
 #endif

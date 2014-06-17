@@ -6,6 +6,7 @@
 #define TOKEN_OUTPUT "token.txt"
 #define MAXlen 1000
 
+
 static char *source = "test.c";
 // Lexer generate source code to token list, if success return 0, else return 1
 int Lexer(){
