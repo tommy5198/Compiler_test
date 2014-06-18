@@ -4,6 +4,7 @@ DEP = Lexer.h Parser.h ParseTable.h ParseTree.h SymbolTable.h Quadruple.h
 CDEP = Lexer.h ParseTree.h
 OBJ = Lexer.o Parser.o ParseTable.o ParseTree.o	SymbolTable.o Quadruple.o
 TARGET = g--
+OUT = token.txt set.txt table.txt tree.txt symbol.txt quadruples.txt code.tm
 
 %.o: %.c $(CDEP)
 	$(CC) -c -o $@ $<
@@ -17,4 +18,4 @@ $(TARGET): $(OBJ)
 .PHONY: clean
 
 clean:
-	rm -f $(TARGET) $(OBJ) *~
+	rm -f *~ $(OUT) $(TARGET) $(OBJ)
