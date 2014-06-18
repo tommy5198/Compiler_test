@@ -16,7 +16,7 @@ struct Snode{
 };
 
 void setSym(int, char*, char*, int, int);
-Snode getSym(char*, int);
+int getSym(char*, int);
 void Symbol(string, char*);
 
 #endif

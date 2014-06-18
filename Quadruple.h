@@ -5,8 +5,8 @@
 extern "C"{
 #endif
 
-void setV(int);
-void OP(char*, char*);
+void setV(char*, int, int);
+void OP(char*, int);
 void setJ(int);
 void setJdis(int);
 void output();

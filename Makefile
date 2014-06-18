@@ -1,8 +1,8 @@
 CC = gcc
 CPPC = g++
-DEP = Lexer.h Parser.h ParseTable.h ParseTree.h SymbolTable.h
+DEP = Lexer.h Parser.h ParseTable.h ParseTree.h SymbolTable.h Quadruple.h
 CDEP = Lexer.h ParseTree.h
-OBJ = Lexer.o Parser.o ParseTable.o ParseTree.o	SymbolTable.o
+OBJ = Lexer.o Parser.o ParseTable.o ParseTree.o	SymbolTable.o Quadruple.o
 TARGET = g--
 
 %.o: %.c $(CDEP)

@@ -41,6 +41,7 @@ void parseTable(){
     
     itr = Grammar.begin();
     set<string>::iterator sitr;
+    fout << "S" << endl;
     while(itr != Grammar.end()){
  //       cout << itr->first << endl;
         for(int i=0; i<itr->second.prod.size(); i++){
